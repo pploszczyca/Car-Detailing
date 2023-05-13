@@ -45,34 +45,29 @@ Production build can be run by Docker. To build image go to `/backend/Car-Detail
 ```bash
 > docker build -t car-detailing-backend .
 ```
-
-To run applications for HTTPS, use the command
+Then run image
 ```bash
-> docker run -p 32776:443 car-detailing-backend
-```
-
-To run applications for HTTP, use the command
-```bash
-> docker run -p 32777:80 car-detailing-backend
-```
-
-To run image for HTTPS and HTTP simultaneously, use the command
-```bash
-> docker run -p 32776:443 -p 32777:80 car-detailing-backend
+> docker run -p 32778:443 car-detailing-backend
 ```
 
 ### Without docker
-First it is needed to install all required packages. Go to `/frontend` and run
-```bash
-> npm install
-```
-If you want to run dev build:
-```bash
-> npm run dev
-```
+First it is needed to install all required packages. Go to `/backend/Car-Detailing-Backend` and run
 
-If you want to run production build:
+Important
+If you do not have the .NET 6.0 LTS SDK on your local device download it from the website:
+https://dotnet.microsoft.com/en-us/download
+
+Otherwise the next steps will not work
+
+First install all dependencies
 ```bash
-> npm run build
-> npm run preview
+> dotnet restore
+```
+Compile the programme
+```bash
+> dotnet build
+```
+Run the programme
+```bash
+> dotnet run
 ```
