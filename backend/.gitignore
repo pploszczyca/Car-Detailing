@@ -1,5 +1,5 @@
-vs
-obj/Container/
+*/.vs/
+*/obj/
 *.suo
 *.cache
 *.csproj.nuget.dgspec.json
