@@ -1,4 +1,7 @@
 vs
+obj/Container/
 *.suo
 *.cache
 *.csproj.nuget.dgspec.json
+*.sentinel
+
