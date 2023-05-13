@@ -20,6 +20,6 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore ./backend/Car-Detailing-Backend/Car-Detailing-Backend.csproj
+      run: dotnet restore ./Car-Detailing-Backend.csproj
     - name: Build
-      run: dotnet build ./backend/Car-Detailing-Backend/Car-Detailing-Backend.csproj --no-restore
+      run: dotnet build ./Car-Detailing-Backend.csproj --no-restore
