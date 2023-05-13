@@ -40,6 +40,11 @@ If you want to run production build:
 
 ---------------------
 ## Backend
+
+### Path to api documentation (Swagger)
+
+localhost:32780/swagger/index.html
+
 ### With docker
 Production build can be run by Docker. To build image go to `/backend/Car-Detailing-Backend` and write:
 ```bash
@@ -47,7 +52,7 @@ Production build can be run by Docker. To build image go to `/backend/Car-Detail
 ```
 Then run image
 ```bash
-> docker run -p 32778:443 car-detailing-backend
+> docker run -p 32780:80 car-detailing-backend
 ```
 
 ### Without docker
