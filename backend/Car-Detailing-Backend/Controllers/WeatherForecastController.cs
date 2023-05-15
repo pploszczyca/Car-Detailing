@@ -4,6 +4,7 @@ namespace Car_Detailing_Backend.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Produces("application/json")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -18,7 +19,24 @@ namespace Car_Detailing_Backend.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Get Weather
+        /// </summary>
+        /// <returns>A weather data</returns>
+        /// <remarks>
+        /// Sample response:
+        /// 
+        /// {
+        /// Get /WeatherForecast/GetWeatherForecast
+        /// {
+        ///     "Data": Date,
+        ///     TemperatureC": 32,
+        ///     "TemperatureF": 256
+        /// }
+        /// </remarks>
+        /// <response code="200">Ok</response>
         [HttpGet(Name = "GetWeatherForecast")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
