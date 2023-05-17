@@ -1,3 +1,5 @@
+using Car_Detailing_Backend.Data;
+using Car_Detailing_Backend.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Car_Detailing_Backend.Controllers
@@ -13,6 +15,7 @@ namespace Car_Detailing_Backend.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        data_reading read = new data_reading();
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
@@ -27,7 +30,7 @@ namespace Car_Detailing_Backend.Controllers
         /// Sample response:
         /// 
         /// {
-        /// Get /WeatherForecast/GetWeatherForecast
+        /// Get GetWeatherForecast
         /// {
         ///     "Data": Date,
         ///     TemperatureC": 32,
@@ -47,5 +50,6 @@ namespace Car_Detailing_Backend.Controllers
             })
             .ToArray();
         }
+
     }
 }
