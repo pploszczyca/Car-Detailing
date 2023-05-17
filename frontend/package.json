@@ -11,11 +11,11 @@
     "preview_all_interfaces": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
+    "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.26",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-navigation": "^4.4.4",
-    "react-navigation-hooks": "^1.1.0",
+    "react-router-dom": "^6.11.2",
     "styled-components": "^5.3.10"
   },
   "devDependencies": {

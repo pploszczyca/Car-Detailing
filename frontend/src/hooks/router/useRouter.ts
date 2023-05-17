@@ -1,20 +1,16 @@
-import {useNavigation} from "react-navigation-hooks";
 import {Routes} from "./routes.ts";
+import {useNavigate} from "react-router-dom";
 
 interface UseRouter {
-    goBack: () => void
     goToMain: () => void
     goToServices: () => void
     goToOrders: () => void
 }
 
 export default (): UseRouter => {
-    const {navigate, goBack} = useNavigation()
+    const navigate = useNavigate()
 
     return {
-        goBack: () => {
-            goBack()
-        },
         goToMain: () => {
             navigate(Routes.MAIN)
         },

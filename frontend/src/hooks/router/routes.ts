@@ -1,5 +1,5 @@
 export enum Routes {
-    MAIN = "Main",
-    SERVICES = "Services",
-    ORDERS = "Orders"
+    MAIN = "/",
+    SERVICES = "/Services",
+    ORDERS = "/Orders"
 }
