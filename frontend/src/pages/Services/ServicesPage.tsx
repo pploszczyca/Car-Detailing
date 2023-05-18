@@ -1,3 +1,3 @@
-export default () => (
-    <h1>Hello from Services!</h1>
-)
+export function ServicesPage() {
+    return <h1>Hello from Services!</h1>;
+}

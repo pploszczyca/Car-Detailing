@@ -1,4 +1,4 @@
-export enum Routes {
+export enum PathRoutes {
     MAIN = "/",
     SERVICES = "/Services",
     ORDERS = "/Orders"

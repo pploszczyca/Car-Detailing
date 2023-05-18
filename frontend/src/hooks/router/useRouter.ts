@@ -1,4 +1,4 @@
-import {Routes} from "./routes.ts";
+import {PathRoutes} from "./pathRoutes.ts";
 import {useNavigate} from "react-router-dom";
 
 interface UseRouter {
@@ -12,13 +12,13 @@ export default (): UseRouter => {
 
     return {
         goToMain: () => {
-            navigate(Routes.MAIN)
+            navigate(PathRoutes.MAIN)
         },
         goToServices: () => {
-            navigate(Routes.SERVICES)
+            navigate(PathRoutes.SERVICES)
         },
         goToOrders: () => {
-            navigate(Routes.ORDERS)
+            navigate(PathRoutes.ORDERS)
         }
     }
 }
