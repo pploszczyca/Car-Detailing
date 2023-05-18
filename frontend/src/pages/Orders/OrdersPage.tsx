@@ -1,3 +1,8 @@
+import Navbar from "../../components/Navbar/Navbar.tsx";
+
 export function OrdersPage() {
-    return <h1>Hello from Orders!</h1>;
+    return <div >
+        <Navbar/>
+        <h1>Hello from Orders!</h1>
+    </div>
 }
