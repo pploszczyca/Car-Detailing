@@ -1,5 +1,13 @@
-export function MainPage () {
+import useMainPage from "./useMainPage.ts";
+import Button from "../../components/Button/Button.tsx";
+
+export function MainPage() {
+    const {onMakeAnOrderClicked, onOrdersClicked} = useMainPage()
+
     return (
-        <h1>Hello from Main!</h1>
+        <div>
+            <Button onClick={onMakeAnOrderClicked}>Umów wizytę w salonie</Button>
+            <Button onClick={onOrdersClicked}>Sprawdź swoje wizyty</Button>
+        </div>
     )
 }
