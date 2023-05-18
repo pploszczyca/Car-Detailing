@@ -1,4 +1,3 @@
-import './App.css'
 import {Routes, Route} from "react-router-dom";
 import {PathRoutes} from "./hooks/router/pathRoutes.ts";
 import {MainPage} from "./pages/Main/MainPage.tsx";
