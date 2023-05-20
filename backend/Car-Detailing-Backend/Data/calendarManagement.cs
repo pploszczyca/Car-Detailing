@@ -55,48 +55,62 @@ namespace Car_Detailing_Backend.Data
 
         public async Task<DateModel?> geAvailableDayByIdAsync(int id)
         {
-            DateModel? day = new DateModel();
-            bool found = false;
-            var calendar = await readingAndWriting.ReadingThingsOnFileAsync(filePathToCalender);
-            foreach (var item in calendar)
+            try
             {
-                var dayObj = item.Split(',');
-                var dayID = int.Parse(dayObj[0]);
-                if (dayID == id)
+                DateModel? day = new DateModel();
+                bool found = false;
+                var calendar = await readingAndWriting.ReadingThingsOnFileAsync(filePathToCalender);
+                foreach (var item in calendar)
                 {
-                    day.dateID = dayID;
-                    day.datetime = DateTime.ParseExact(dayObj[1], format, null);
-                    day.isAvaible = bool.Parse(dayObj[2]);
-                    found = true;
-                    break;
+                    var dayObj = item.Split(',');
+                    var dayID = int.Parse(dayObj[0]);
+                    if (dayID == id)
+                    {
+                        day.dateID = dayID;
+                        day.datetime = DateTime.ParseExact(dayObj[1], format, null);
+                        day.isAvaible = bool.Parse(dayObj[2]);
+                        found = true;
+                        break;
+                    }
                 }
-            }
 
-            if (!found)
+                if (!found)
+                {
+                    day = null;
+                }
+
+                return day;
+            }
+            catch (Exception)
             {
-                day = null;
+                throw;
             }
-
-            return day;
         }
 
         public async Task<List<DateModelShort>> getAllAvailableDaysAsync()
         {
-            var daysAilable = new List<DateModelShort>();
-            var calendar = await readingAndWriting.ReadingThingsOnFileAsync(filePathToCalender);
-            foreach (var item in calendar)
+            try
             {
-                var day = item.Split(',');
-                var isAvailable = bool.Parse(day[2]);
-                if (isAvailable)
+                var daysAilable = new List<DateModelShort>();
+                var calendar = await readingAndWriting.ReadingThingsOnFileAsync(filePathToCalender);
+                foreach (var item in calendar)
                 {
-                    var newAvailableDay = new DateModelShort();
-                    newAvailableDay.dateID = int.Parse(day[0]);
-                    newAvailableDay.datetime = DateTime.ParseExact(day[1], format, null);
-                    daysAilable.Add(newAvailableDay);
+                    var day = item.Split(',');
+                    var isAvailable = bool.Parse(day[2]);
+                    if (isAvailable)
+                    {
+                        var newAvailableDay = new DateModelShort();
+                        newAvailableDay.dateID = int.Parse(day[0]);
+                        newAvailableDay.datetime = DateTime.ParseExact(day[1], format, null);
+                        daysAilable.Add(newAvailableDay);
+                    }
                 }
+                return daysAilable;
             }
-            return daysAilable;
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

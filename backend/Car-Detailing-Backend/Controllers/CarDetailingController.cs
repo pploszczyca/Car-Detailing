@@ -151,7 +151,7 @@ namespace Car_Detailing_Backend.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogError("Błąd działania metdoy Get locations");
+                logger.LogError("Błąd działania metdoy Get dates");
                 logger.LogError(ex.ToString());
                 return BadRequest();
             }
@@ -174,7 +174,7 @@ namespace Car_Detailing_Backend.Controllers
         ///</remarks>
         /// <response code="400">Date with this id does not exist</response>
         /// <response code="404">Date is not available</response>
-        [HttpGet(Name = "/dates/{id:int}")]
+        [HttpGet(Name = "/date/{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -202,7 +202,7 @@ namespace Car_Detailing_Backend.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogError("Błąd działania metdoy Get locations");
+                logger.LogError("Błąd działania metdoy Get date by id");
                 logger.LogError(ex.ToString());
                 return BadRequest();
             }
