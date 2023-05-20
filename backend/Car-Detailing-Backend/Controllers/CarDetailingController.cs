@@ -13,11 +13,16 @@ namespace Car_Detailing_Backend.Controllers
     {
         private readonly ILogger<CarDetailingController> logger;
         private readonly ICalendarManagement calendar;
+        private readonly IServiceManagement service;
 
-        public CarDetailingController(ILogger<CarDetailingController> logger, ICalendarManagement calendar)
+        public CarDetailingController
+            (ILogger<CarDetailingController> logger, 
+            ICalendarManagement calendar, 
+            IServiceManagement service)
         {
             this.logger = logger;
             this.calendar = calendar;
+            this.service = service;
         }
 
 
@@ -46,8 +51,7 @@ namespace Car_Detailing_Backend.Controllers
         {
             try
             {
-                var data = new data_reading();
-                var dane = await data.readDataAsyns();
+                var dane = await service.ReadingOfServicesAsyns();
                 return Ok(dane);
             }
             catch (Exception ex)
