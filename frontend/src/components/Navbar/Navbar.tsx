@@ -1,19 +1,19 @@
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import {PathRoutes} from "../../hooks/router/pathRoutes.ts";
-import logo from "../../assets/images/logo.png"
+import logo from "../../assets/images/logo-small.webp"
 
 const NavbarContainer = styled.nav`
   display: flex;
+  position: fixed;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
   width: 100%;
   height: 77px;
   background-color: rgba(47, 46, 65, 0.9);
   margin: 0;
   top: 0;
-  z-index: 1000;
+  z-index: 1;
 `;
 
 const LogoImage = styled.img`
