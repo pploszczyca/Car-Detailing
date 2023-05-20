@@ -31,7 +31,7 @@ namespace Car_Detailing_Backend.Controllers
         /// </summary>
         /// <returns>List of services</returns>
         /// <response code="200">Ok</response>
-        /// <returns></returns
+        /// <returns></returns>
         /// <remarks>
         /// Sample request:
         ///
@@ -82,6 +82,42 @@ namespace Car_Detailing_Backend.Controllers
             catch (Exception ex)
             {
                 logger.LogError("Błąd działania metdoy Get generatenewdates");
+                logger.LogError(ex.ToString());
+                return BadRequest();
+            }
+        }
+
+        /// <summary>
+        /// Get locations
+        /// </summary>
+        /// <returns>List of locations</returns>
+        /// <response code="200">Ok</response>
+        /// <returns></returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     Get /locations
+        ///     {
+        ///         "id": 1,
+        ///         "name": "Zdzisiek warsztat",
+        ///         "street": "ul. Wrocławska 11",
+        ///         "city": "Kraków"
+        ///     }
+        ///</remarks>
+        /// <response code="400">BadRequest</response>
+        [HttpGet(Name = "/locations")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<List<list_of_services>>> locations()
+        {
+            try
+            {
+                var dane = await service.ReadingOfLocationsAsyns();
+                return Ok(dane);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("Błąd działania metdoy Get locations");
                 logger.LogError(ex.ToString());
                 return BadRequest();
             }

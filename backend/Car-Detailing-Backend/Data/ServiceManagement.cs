@@ -6,11 +6,36 @@ namespace Car_Detailing_Backend.Data
     public class ServiceManagement : IServiceManagement
     {
         private readonly string pathToServices = @"./Data/data_files/serviceData.csv";
+        private readonly string pathToLocation = @"./Data/data_files/locations.csv";
         private readonly IReadingAndWriting readingAndWriting;
 
         public ServiceManagement(IReadingAndWriting readingAndWriting)
         {
             this.readingAndWriting = readingAndWriting;
+        }
+
+        public async Task<List<locationsModel>> ReadingOfLocationsAsyns()
+        {
+            try
+            {
+                var locationList = new List<locationsModel>();
+                var data = await readingAndWriting.ReadingThingsOnFileAsync(pathToLocation);
+                foreach (var row in data)
+                {
+                    var locationObj = new locationsModel();
+                    var location = row.Split(',');
+                    locationObj.locationsID = int.Parse(location[0]);
+                    locationObj.name = location[1];
+                    locationObj.street = location[2];
+                    locationObj.city = location[3];
+                    locationList.Add(locationObj);
+                }
+                return locationList;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<List<list_of_services>> ReadingOfServicesAsyns()
