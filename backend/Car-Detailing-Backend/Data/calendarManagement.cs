@@ -16,29 +16,35 @@ namespace Car_Detailing_Backend.Data
 
         public void CreateNewTerms()
         {
-            var calendar = new List<string>();
-            var day = DateTime.Now;
-            var rnd = new Random();
-
-            day = day.AddDays(1);
-
-            for (int i = 0; i < 5; i++)
+            try
             {
-                day = day.Date + new TimeSpan(9, 0, 0);
-                for (int j = 0; j < 11; j++)
-                {
-                    var isActive = rnd.Next(0, 4);
-                    if (isActive == 1 || isActive == 2)
-                    {
-                        calendar.Add(day.ToString());
-                    }
-                    day = day.AddHours(1);
-                }
+                var calendar = new List<string>();
+                var day = DateTime.Now;
+                var rnd = new Random();
+
                 day = day.AddDays(1);
+
+                for (int i = 0; i < 5; i++)
+                {
+                    day = day.Date + new TimeSpan(9, 0, 0);
+                    for (int j = 0; j < 11; j++)
+                    {
+                        var isActive = rnd.Next(0, 4);
+                        if (isActive == 1 || isActive == 2)
+                        {
+                            calendar.Add(day.ToString());
+                        }
+                        day = day.AddHours(1);
+                    }
+                    day = day.AddDays(1);
+                }
+
+                readingAndWriting.SavingThingsToAFileAsync(filePathToCalender, calendar);
             }
-
-            readingAndWriting.SavingThingsToAFileAsync(filePathToCalender, calendar);
-
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
     }

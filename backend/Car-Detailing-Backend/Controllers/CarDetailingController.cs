@@ -74,8 +74,17 @@ namespace Car_Detailing_Backend.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult generatenewdates()
         {
-            calendar.CreateNewTerms();
-            return Ok();
+            try
+            {
+                calendar.CreateNewTerms();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("Błąd działania metdoy Get generatenewdates");
+                logger.LogError(ex.ToString());
+                return BadRequest();
+            }
         }
 
     }
