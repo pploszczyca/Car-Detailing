@@ -1,4 +1,5 @@
 ﻿using Car_Detailing_Backend.Data.Interface;
+using Car_Detailing_Backend.Data.Models;
 
 namespace Car_Detailing_Backend.Data
 {
@@ -6,6 +7,7 @@ namespace Car_Detailing_Backend.Data
     {
 
         readonly string filePathToCalender = @"./Data/data_files/calendar.csv";
+        readonly string format = "dd/MM/yyyy HH:mm";
         private readonly IReadingAndWriting readingAndWriting;
 
         public calendarManagement(IReadingAndWriting readingAndWriting)
@@ -21,6 +23,8 @@ namespace Car_Detailing_Backend.Data
                 var calendar = new List<string>();
                 var day = DateTime.Now;
                 var rnd = new Random();
+                var id = 1;
+                string date = string.Empty;
 
                 day = day.AddDays(1);
 
@@ -32,7 +36,9 @@ namespace Car_Detailing_Backend.Data
                         var isActive = rnd.Next(0, 4);
                         if (isActive == 1 || isActive == 2)
                         {
-                            calendar.Add(day.ToString());
+                            date = id.ToString() + "," + day.ToString("dd/MM/yyyy HH:mm") + "," + true.ToString();
+                            calendar.Add(date);
+                            id++;
                         }
                         day = day.AddHours(1);
                     }
@@ -47,5 +53,50 @@ namespace Car_Detailing_Backend.Data
             }
         }
 
+        public async Task<DateModel?> geAvailableDayByIdAsync(int id)
+        {
+            DateModel? day = new DateModel();
+            bool found = false;
+            var calendar = await readingAndWriting.ReadingThingsOnFileAsync(filePathToCalender);
+            foreach (var item in calendar)
+            {
+                var dayObj = item.Split(',');
+                var dayID = int.Parse(dayObj[0]);
+                if (dayID == id)
+                {
+                    day.dateID = dayID;
+                    day.datetime = DateTime.ParseExact(dayObj[1], format, null);
+                    day.isAvaible = bool.Parse(dayObj[2]);
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                day = null;
+            }
+
+            return day;
+        }
+
+        public async Task<List<DateModelShort>> getAllAvailableDaysAsync()
+        {
+            var daysAilable = new List<DateModelShort>();
+            var calendar = await readingAndWriting.ReadingThingsOnFileAsync(filePathToCalender);
+            foreach (var item in calendar)
+            {
+                var day = item.Split(',');
+                var isAvailable = bool.Parse(day[2]);
+                if (isAvailable)
+                {
+                    var newAvailableDay = new DateModelShort();
+                    newAvailableDay.dateID = int.Parse(day[0]);
+                    newAvailableDay.datetime = DateTime.ParseExact(day[1], format, null);
+                    daysAilable.Add(newAvailableDay);
+                }
+            }
+            return daysAilable;
+        }
     }
 }
