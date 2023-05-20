@@ -1,7 +1,8 @@
 import {ServicesContainerWithNavbar} from "../../components/Navbar/ContainerWithNavbar.tsx";
+import Title from "../../components/Title/Title.tsx";
 
 export function ServicesPage() {
     return <ServicesContainerWithNavbar>
-        <h1>Hello from Services!</h1>
+        <Title>Hello from Services!</Title>
     </ServicesContainerWithNavbar>
 }

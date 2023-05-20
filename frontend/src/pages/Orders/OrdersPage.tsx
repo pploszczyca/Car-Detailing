@@ -1,7 +1,8 @@
 import {OrdersContainerWithNavbar} from "../../components/Navbar/ContainerWithNavbar.tsx";
+import Title from "../../components/Title/Title.tsx";
 
 export function OrdersPage() {
     return <OrdersContainerWithNavbar>
-        <h1>Hello from Orders!</h1>
+        <Title>Hello from Orders!</Title>
     </OrdersContainerWithNavbar>
 }

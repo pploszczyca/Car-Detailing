@@ -26,7 +26,7 @@ const NavLinks = styled.div`
 `;
 
 const NavLink = styled(Link)`
-  font-family: 'Literata', serif;
+  font-family: 'Literata',serif;
   font-style: normal;
   font-weight: 400;
   font-size: 32px;
