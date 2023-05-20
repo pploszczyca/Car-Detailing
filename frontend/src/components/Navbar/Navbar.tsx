@@ -17,7 +17,8 @@ const NavbarContainer = styled.nav`
 `;
 
 const LogoImage = styled.img`
-  height: 77px;
+  height: 66px;
+  padding-left: 18px;
 `;
 
 const NavLinks = styled.div`
@@ -25,28 +26,35 @@ const NavLinks = styled.div`
 `;
 
 const NavLink = styled(Link)`
-  font-family: 'Literata',serif;
+  font-family: 'Literata', serif;
   font-style: normal;
   font-weight: 400;
   font-size: 32px;
   line-height: 48px;
-
   color: #FFFFFF;
   margin-right: 64px;
+  text-decoration: none;
 `;
 
-const Navbar = () => {
-    return (
+interface NavbarProperties {
+    shouldShowOrdersOption: boolean
+    shouldShowServicesOption: boolean
+}
+
+const Navbar = (
+    {shouldShowOrdersOption, shouldShowServicesOption}: NavbarProperties
+) =>
+    (
         <NavbarContainer>
-            <LogoImage src={logo}/>
+            <Link to={PathRoutes.MAIN}>
+                <LogoImage src={logo}/>
+            </Link>
             <NavLinks>
-                <NavLink to={PathRoutes.ORDERS}>Moje Wizyty</NavLink>
-                <NavLink to={PathRoutes.SERVICES}>Umów wizytę</NavLink>
-                {/*TODO: Make it run back*/}
+                {shouldShowOrdersOption && <NavLink to={PathRoutes.ORDERS}>Moje Wizyty</NavLink>}
+                {shouldShowServicesOption && <NavLink to={PathRoutes.SERVICES}>Umów wizytę</NavLink>}
                 <NavLink to={PathRoutes.MAIN}>Powrót</NavLink>
             </NavLinks>
         </NavbarContainer>
     );
-};
 
 export default Navbar;

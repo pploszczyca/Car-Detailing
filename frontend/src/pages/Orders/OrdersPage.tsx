@@ -1,10 +1,7 @@
-import Navbar from "../../components/Navbar/Navbar.tsx";
+import {OrdersContainerWithNavbar} from "../../components/Navbar/ContainerWithNavbar.tsx";
 
 export function OrdersPage() {
-    return <div>
-        <Navbar/>
-        <div style={{marginTop: '77px'}}>
-            <h1>Hello from Orders!</h1>
-        </div>
-    </div>
+    return <OrdersContainerWithNavbar>
+        <h1>Hello from Orders!</h1>
+    </OrdersContainerWithNavbar>
 }
