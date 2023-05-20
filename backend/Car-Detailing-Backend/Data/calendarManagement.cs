@@ -1,13 +1,22 @@
-﻿namespace Car_Detailing_Backend.Data
+﻿using Car_Detailing_Backend.Data.Interface;
+
+namespace Car_Detailing_Backend.Data
 {
     public class calendarManagement : ICalendarManagement
     {
 
-        readonly string filePath = @"./Data/data_files/calendar.csv";
+        readonly string filePathToCalender = @"./Data/data_files/calendar.csv";
+        private readonly IReadingAndWriting readingAndWriting;
+
+        public calendarManagement(IReadingAndWriting readingAndWriting)
+        {
+            this.readingAndWriting = readingAndWriting;
+        }
+
 
         public void CreateNewTerms()
         {
-            var calendar = new List<DateTime>();
+            var calendar = new List<string>();
             var day = DateTime.Now;
             var rnd = new Random();
 
@@ -18,23 +27,19 @@
                 day = day.Date + new TimeSpan(9, 0, 0);
                 for (int j = 0; j < 11; j++)
                 {
-                    calendar.Add(day);
+                    var isActive = rnd.Next(0, 4);
+                    if (isActive == 1 || isActive == 2)
+                    {
+                        calendar.Add(day.ToString());
+                    }
                     day = day.AddHours(1);
                 }
                 day = day.AddDays(1);
             }
 
-            using (StreamWriter writer = new StreamWriter(filePath))
-            {
-                foreach (var line in calendar)
-                {
-                    var isActive = rnd.Next(0, 4);
-                    if (isActive == 1 || isActive == 2)
-                    {
-                        writer.WriteLine(line);
-                    }
-                }
-            }
+            readingAndWriting.SavingThingsToAFileAsync(filePathToCalender, calendar);
+
         }
+
     }
 }
