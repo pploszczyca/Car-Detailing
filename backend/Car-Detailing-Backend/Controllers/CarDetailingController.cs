@@ -11,10 +11,12 @@ namespace Car_Detailing_Backend.Controllers
     public class CarDetailingController : ControllerBase
     {
         private readonly ILogger<CarDetailingController> logger;
+        private readonly ICalendarManagement calendar;
 
-        public CarDetailingController(ILogger<CarDetailingController> logger)
+        public CarDetailingController(ILogger<CarDetailingController> logger, ICalendarManagement calendar)
         {
             this.logger = logger;
+            this.calendar = calendar;
         }
 
 
@@ -23,12 +25,16 @@ namespace Car_Detailing_Backend.Controllers
         /// </summary>
         /// <returns>List of services</returns>
         /// <response code="200">Ok</response>
+        /// <returns></returns
         /// <remarks>
-        /// {
-        ///     “id”: 1,
-        ///     “name”: “Mycie ręczne”,
-        ///     “type”: “Mycie zewnętrzne”,
-        ///     “price”: 50,
+        /// Sample request:
+        ///
+        ///     Get /Services
+        ///     {
+        ///         "id": 1,
+        ///         "name": "Mycie ręczne",
+        ///         "type": "Mycie zewnętrzne",
+        ///         "price": 50
         ///     }
         ///</remarks>
         /// <response code="400">BadRequest</response>
@@ -49,6 +55,22 @@ namespace Car_Detailing_Backend.Controllers
                 logger.LogError(ex.ToString());
                 return BadRequest();
             }
+        }
+
+
+        /// <summary>
+        /// Creating a new calendar
+        /// </summary>
+        /// <returns>List of services</returns>
+        /// <response code="200">Ok</response>
+        /// <response code="400">BadRequest</response>
+        [HttpGet(Name = "/generatenewdates")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult generatenewdates()
+        {
+            calendar.CreateNewTerms();
+            return Ok();
         }
 
     }
