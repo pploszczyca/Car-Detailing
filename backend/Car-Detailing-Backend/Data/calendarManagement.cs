@@ -9,6 +9,7 @@
         {
             var calendar = new List<DateTime>();
             var day = DateTime.Now;
+            var rnd = new Random();
 
             day = day.AddDays(1);
 
@@ -27,7 +28,11 @@
             {
                 foreach (var line in calendar)
                 {
-                    writer.WriteLine(line);
+                    var isActive = rnd.Next(0, 4);
+                    if (isActive == 1 || isActive == 2)
+                    {
+                        writer.WriteLine(line);
+                    }
                 }
             }
         }
