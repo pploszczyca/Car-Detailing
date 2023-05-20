@@ -10,8 +10,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddScoped<ICalendarManagement, calendarManagement>(); 
+builder.Services.AddScoped<ICalendarManagement, calendarManagement>();
 builder.Services.AddScoped<IReadingAndWriting, ReadingAndWriting>();
+builder.Services.AddScoped<IServiceManagement, ServiceManagement>();
 
 builder.Services.AddSwaggerGen(options =>
 {
