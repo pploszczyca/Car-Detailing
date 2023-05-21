@@ -6,38 +6,28 @@ namespace Car_Detailing_Backend.Data
     {
         public async Task<List<string>> ReadingThingsOnFileAsync(string filePath)
         {
-            try
+
+            var data = new List<string>();
+            var file = await File.ReadAllLinesAsync(filePath);
+            foreach (var line in file)
             {
-                var data = new List<string>();
-                var file = await File.ReadAllLinesAsync(filePath);
-                foreach (var line in file)
-                {
-                    data.Add(line);
-                }
-                return data;
+                data.Add(line);
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            return data;
+
         }
 
         public async Task SavingThingsToAFileAsync(string filePath, List<string> data)
         {
-            try
+
+            using (StreamWriter writer = new StreamWriter(filePath))
             {
-                using (StreamWriter writer = new StreamWriter(filePath))
+                foreach (var line in data)
                 {
-                    foreach (var line in data)
-                    {
-                        await writer.WriteLineAsync(line);
-                    }
+                    await writer.WriteLineAsync(line);
                 }
             }
-            catch (Exception)
-            {
-                throw;
-            }
+
         }
 
     }
