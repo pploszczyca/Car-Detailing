@@ -47,9 +47,14 @@ const useServicesPage = (): UseServicesPage => {
     useEffect(() => {
         if (isSuccess && services != undefined) {
             const groups = mapServicesToServiceGroups(services)
-            setServiceGroups(groups)
+
+            // Needed condition to prevent maxDeep hook error
+            if (JSON.stringify(groups) !== JSON.stringify(serviceGroups)) {
+                setServiceGroups(groups)
+            }
         }
-    }, [isSuccess, services])
+    }, [isSuccess, services, serviceGroups])
+
 
     function mapServicesToServiceGroups(services: Service[]): ServiceGroup[] {
         const serviceGroups = services.reduce((groups: Record<string, ServiceItem[]>, service) => {
@@ -75,8 +80,11 @@ const useServicesPage = (): UseServicesPage => {
             return total + groupTotal;
         }, 0);
 
-        setSumOfCheckedServices(newSum)
-    }, [serviceGroups])
+        if (newSum !== sumOfCheckedServices) {
+            setSumOfCheckedServices(newSum)
+        }
+    }, [serviceGroups, sumOfCheckedServices])
+
 
     const onServiceChecked = (serviceId: number) => {
         const groups = serviceGroups
@@ -84,7 +92,7 @@ const useServicesPage = (): UseServicesPage => {
                 ...group,
                 serviceItems: group.serviceItems.map(service => ({
                     ...service,
-                    isChecked: service.isChecked || service.id == serviceId
+                    isChecked: service.id == serviceId || (service.id != serviceId && service.isChecked)
                 })),
             }))
 

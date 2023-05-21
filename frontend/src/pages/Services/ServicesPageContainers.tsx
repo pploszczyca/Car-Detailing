@@ -5,5 +5,8 @@ export const GroupContainer = styled.div`
 `;
 
 export const ServiceItemContainer = styled.div`
+    display: flex;
+    justify-items: center;
+    align-items: center;
     margin-left: 40px;
 `;

@@ -4,6 +4,7 @@ import useServicesPage from "./useServicesPage.ts";
 import SecondTitle from "../../components/SecondTitle/SecondTitle.tsx";
 import {GroupContainer, ServiceItemContainer} from "./ServicesPageContainers.tsx";
 import Text from "../../components/Text/Text.tsx";
+import Checkbox from "../../components/Checkbox/Checkbox.tsx";
 
 export function ServicesPage() {
     const {
@@ -24,12 +25,12 @@ export function ServicesPage() {
 
     return <ServicesContainerWithNavbar>
         <Title>Wybierz komplet usług dla Twojego samochodu:</Title>
-
             {serviceGroups.map(group =>
                 <GroupContainer>
                     <SecondTitle>{group.type}</SecondTitle>
                     {group.serviceItems.map(service =>
                         <ServiceItemContainer>
+                            <Checkbox onClick={() => onServiceChecked(service.id)}/>
                             <Text>{service.name} - ${service.price}</Text>
                         </ServiceItemContainer>
                     )}
