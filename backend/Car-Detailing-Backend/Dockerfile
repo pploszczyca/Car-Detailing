@@ -11,6 +11,7 @@ COPY ["Car-Detailing-Backend.csproj", "."]
 RUN dotnet restore "./Car-Detailing-Backend.csproj"
 COPY . .
 WORKDIR "/src/."
+
 RUN dotnet build "Car-Detailing-Backend.csproj" -c Release -o /app/build
 
 FROM build AS publish
@@ -19,4 +20,8 @@ RUN dotnet publish "Car-Detailing-Backend.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Car-Detailing-Backend.dll"]
+
+# Przenieœ pliki CSV do docelowego katalogu aplikacji
+COPY /Data/data_files/*.csv /app/
 ENTRYPOINT ["dotnet", "Car-Detailing-Backend.dll"]
