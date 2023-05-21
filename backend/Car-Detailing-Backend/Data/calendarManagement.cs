@@ -5,9 +5,10 @@ namespace Car_Detailing_Backend.Data
 {
     public class calendarManagement : ICalendarManagement
     {
-
-        readonly string filePathToCalender = @"./Data/data_files/calendar.csv";
-        //readonly string filePathToCalender = @"./calendar.csv";
+        //dev
+        //readonly string filePathToCalender = @"./Data/data_files/calendar.csv";
+        //prod
+        readonly string filePathToCalender = @"./calendar.csv";
         readonly string format = "dd/MM/yyyy HH:mm";
         private readonly IReadingAndWriting readingAndWriting;
 
