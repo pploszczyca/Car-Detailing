@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-const Title = styled.h1`
+const Text = styled.text`
   font-family: 'Literata', serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 32px;
-  line-height: 48px;
+  font-size: 20px;
+  line-height: 30px;
 
   color: #000000;
-`
+`;
 
-export default Title
+export default Text
