@@ -5,8 +5,10 @@ namespace Car_Detailing_Backend.Data
 {
     public class ServiceManagement : IServiceManagement
     {
-        private readonly string pathToServices = @"./Data/data_files/serviceData.csv";
-        private readonly string pathToLocation = @"./Data/data_files/locations.csv";
+        //private readonly string pathToServices = @"./Data/data_files/serviceData.csv";
+        //private readonly string pathToLocation = @"./Data/data_files/locations.csv";
+        private readonly string pathToServices = @"./serviceData.csv";
+        private readonly string pathToLocation = @"./locations.csv";
         private readonly IReadingAndWriting readingAndWriting;
 
         public ServiceManagement(IReadingAndWriting readingAndWriting)
