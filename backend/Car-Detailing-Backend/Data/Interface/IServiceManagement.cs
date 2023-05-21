@@ -4,7 +4,7 @@ namespace Car_Detailing_Backend.Data.Interface
 {
     public interface IServiceManagement
     {
-        public Task<List<list_of_services>> ReadingOfServicesAsyns();
-        public Task<List<locationsModel>> ReadingOfLocationsAsyns();
+        public Task<List<ListOfServicesModel>> ReadingOfServicesAsync();
+        public Task<List<LocationsModel>> ReadingOfLocationsAsync();
     }
 }

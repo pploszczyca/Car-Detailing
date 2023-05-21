@@ -11,18 +11,18 @@ namespace Car_Detailing_Backend.Controllers
     [Produces("application/json")]
     public class CarDetailingController : ControllerBase
     {
-        private readonly ILogger<CarDetailingController> logger;
-        private readonly ICalendarManagement calendar;
-        private readonly IServiceManagement service;
+        private readonly ILogger<CarDetailingController> _logger;
+        private readonly ICalendarManagement _calendar;
+        private readonly IServiceManagement _service;
 
         public CarDetailingController
             (ILogger<CarDetailingController> logger, 
             ICalendarManagement calendar, 
             IServiceManagement service)
         {
-            this.logger = logger;
-            this.calendar = calendar;
-            this.service = service;
+            this._logger = logger;
+            this._calendar = calendar;
+            this._service = service;
         }
 
 
@@ -47,42 +47,42 @@ namespace Car_Detailing_Backend.Controllers
         [HttpGet(Name = "/services")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<List<list_of_services>>> Services()
+        public async Task<ActionResult<List<ListOfServicesModel>>> Services()
         {
             try
             {
-                var dane = await service.ReadingOfServicesAsyns();
+                var dane = await _service.ReadingOfServicesAsync();
                 return Ok(dane);
             }
             catch (Exception ex)
             {
-                logger.LogError("Błąd działania metdoy Get Service");
-                logger.LogError(ex.ToString());
+                _logger.LogError("Błąd działania metody Get Service");
+                _logger.LogError(ex.ToString());
                 return BadRequest();
             }
         }
 
 
         /// <summary>
-        /// Creating a new calendar
+        /// Creating a new _calendar
         /// </summary>
         /// <returns>List of services</returns>
-        /// <response code="200">Ok</response>
+        /// <response code="201"></response>
         /// <response code="400">BadRequest</response>
-        [HttpGet(Name = "/generatenewdates")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpPost(Name = "/generatenewdates")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult generatenewdates()
         {
             try
             {
-                calendar.CreateNewTerms();
-                return Ok();
+                _calendar.CreateNewTerms();
+                return StatusCode(201);
             }
             catch (Exception ex)
             {
-                logger.LogError("Błąd działania metdoy Get generatenewdates");
-                logger.LogError(ex.ToString());
+                _logger.LogError("Błąd działania metody Get generatenewdates");
+                _logger.LogError(ex.ToString());
                 return BadRequest();
             }
         }
@@ -108,17 +108,17 @@ namespace Car_Detailing_Backend.Controllers
         [HttpGet(Name = "/locations")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<List<list_of_services>>> locations()
+        public async Task<ActionResult<List<ListOfServicesModel>>> locations()
         {
             try
             {
-                var dane = await service.ReadingOfLocationsAsyns();
+                var dane = await _service.ReadingOfLocationsAsync();
                 return Ok(dane);
             }
             catch (Exception ex)
             {
-                logger.LogError("Błąd działania metdoy Get locations");
-                logger.LogError(ex.ToString());
+                _logger.LogError("Błąd działania metody Get locations");
+                _logger.LogError(ex.ToString());
                 return BadRequest();
             }
         }
@@ -146,13 +146,13 @@ namespace Car_Detailing_Backend.Controllers
         {
             try
             {
-                var dane = await calendar.getAllAvailableDaysAsync();
+                var dane = await _calendar.getAllAvailableDaysAsync();
                 return Ok(dane);
             }
             catch (Exception ex)
             {
-                logger.LogError("Błąd działania metdoy Get dates");
-                logger.LogError(ex.ToString());
+                _logger.LogError("Błąd działania metody Get dates");
+                _logger.LogError(ex.ToString());
                 return BadRequest();
             }
         }
@@ -182,7 +182,7 @@ namespace Car_Detailing_Backend.Controllers
         {
             try
             {
-                DateModel? dane = await calendar.geAvailableDayByIdAsync(id);
+                DateModel? dane = await _calendar.geAvailableDayByIdAsync(id);
                 if (dane == null)
                 {
                     return BadRequest("Date with this id does not exist");
@@ -202,8 +202,8 @@ namespace Car_Detailing_Backend.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogError("Błąd działania metdoy Get date by id");
-                logger.LogError(ex.ToString());
+                _logger.LogError("Błąd działania metody Get date by id");
+                _logger.LogError(ex.ToString());
                 return BadRequest();
             }
         }
