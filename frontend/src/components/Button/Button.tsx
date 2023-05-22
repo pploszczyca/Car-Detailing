@@ -14,6 +14,11 @@ const Button = styled.button`
   color: #FFFFFF;
 
   padding: 24px 34px;
+
+  &:disabled {
+    background: rgba(47, 46, 65, 0.45);
+    cursor: not-allowed;
+  }
 `
 
 export default Button

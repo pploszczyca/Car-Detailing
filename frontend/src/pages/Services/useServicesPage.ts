@@ -16,7 +16,7 @@ interface ServiceGroup {
 
 interface UseServicesPage {
     error: string
-    isConfirmButtonEnabled: boolean
+    isConfirmButtonDisabled: boolean
     isError: boolean
     isLoading: boolean
     isSumVisible: boolean
@@ -48,12 +48,9 @@ const useServicesPage = (): UseServicesPage => {
         if (isSuccess && services != undefined) {
             const groups = mapServicesToServiceGroups(services)
 
-            // Needed condition to prevent maxDeep hook error
-            if (JSON.stringify(groups) !== JSON.stringify(serviceGroups)) {
-                setServiceGroups(groups)
-            }
+            setServiceGroups(groups)
         }
-    }, [isSuccess, services, serviceGroups])
+    }, [isSuccess])
 
 
     function mapServicesToServiceGroups(services: Service[]): ServiceGroup[] {
@@ -92,7 +89,7 @@ const useServicesPage = (): UseServicesPage => {
                 ...group,
                 serviceItems: group.serviceItems.map(service => ({
                     ...service,
-                    isChecked: service.id == serviceId || (service.id != serviceId && service.isChecked)
+                    isChecked: (service.id == serviceId && !service.isChecked) || (service.id != serviceId && service.isChecked)
                 })),
             }))
 
@@ -101,11 +98,12 @@ const useServicesPage = (): UseServicesPage => {
 
     const onSubmitButtonClicked = () => {
         // TODO
+        alert("XDDD")
     }
 
     return {
         error: error,
-        isConfirmButtonEnabled: false,
+        isConfirmButtonDisabled: sumOfCheckedServices <= 0,
         isLoading: isLoading,
         isError: isError,
         isSumVisible: sumOfCheckedServices > 0,
