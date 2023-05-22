@@ -1,4 +1,4 @@
-import Location from "../../domain/Location.ts";
+import LocationEntity from "../../domain/LocationEntity.ts";
 import {useQuery} from "react-query";
 import {AxiosError, AxiosResponse} from "axios";
 import getLocationsApi, {GetLocationsResponse} from "../../api/getLocationsApi.ts";
@@ -8,11 +8,11 @@ interface UseGetLocationsQuery {
     isError: boolean
     isLoading: boolean
     isSuccess: boolean
-    services: Location[] | undefined
+    locations: LocationEntity[] | undefined
 }
 
 
-const useGetLocationQuery = (): UseGetLocationsQuery => {
+const useGetLocationsQuery = (): UseGetLocationsQuery => {
     const {
         data,
         isError,
@@ -26,15 +26,15 @@ const useGetLocationQuery = (): UseGetLocationsQuery => {
         isError: isError,
         isLoading: isLoading,
         isSuccess: isSuccess,
-        services: mapToServices(data),
+        locations: mapToServices(data),
     }
 }
 
-const mapToServices = (data: AxiosResponse<GetLocationsResponse[]> | undefined): Location[] | undefined =>
+const mapToServices = (data: AxiosResponse<GetLocationsResponse[]> | undefined): LocationEntity[] | undefined =>
     data?.data.map(item => ({
         ...item,
         id: item.locationID
     }))
 
-export default useGetLocationQuery
+export default useGetLocationsQuery
 

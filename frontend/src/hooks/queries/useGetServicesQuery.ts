@@ -1,6 +1,6 @@
 import {useQuery} from "react-query";
 import {getServicesApi, GetServicesResponse} from "../../api/getServicesApi.ts";
-import Service from "../../domain/Service.ts";
+import ServiceEntity from "../../domain/ServiceEntity.ts";
 import {AxiosError, AxiosResponse} from "axios";
 
 interface UseGetServicesQuery {
@@ -8,7 +8,7 @@ interface UseGetServicesQuery {
     isError: boolean
     isLoading: boolean
     isSuccess: boolean
-    services: Service[] | undefined
+    services: ServiceEntity[] | undefined
 }
 
 
@@ -30,7 +30,7 @@ const useGetServicesQuery = (): UseGetServicesQuery => {
     }
 }
 
-const mapToServices = (data: AxiosResponse<GetServicesResponse[]> | undefined): Service[] | undefined =>
+const mapToServices = (data: AxiosResponse<GetServicesResponse[]> | undefined): ServiceEntity[] | undefined =>
     data?.data.map(item => ({
         id: item.servicesID,
         name: item.name,

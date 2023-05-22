@@ -1,4 +1,4 @@
-import Date from "../../domain/Date.ts";
+import DateEntity from "../../domain/DateEntity.ts";
 import {useQuery} from "react-query";
 import {AxiosError, AxiosResponse} from "axios";
 import getDatesApi, {GetDatesResponse} from "../../api/getDatesApi.ts";
@@ -8,7 +8,7 @@ interface UseGetAvailableDatesQuery {
     isError: boolean
     isLoading: boolean
     isSuccess: boolean
-    services: Date[] | undefined
+    dates: DateEntity[] | undefined
 }
 
 const useGetAvailableDatesQuery = (): UseGetAvailableDatesQuery => {
@@ -25,11 +25,11 @@ const useGetAvailableDatesQuery = (): UseGetAvailableDatesQuery => {
         isError: isError,
         isLoading: isLoading,
         isSuccess: isSuccess,
-        services: mapToDates(data),
+        dates: mapToDates(data),
     }
 }
 
-const mapToDates = (data: AxiosResponse<GetDatesResponse[]> | undefined): Date[] | undefined =>
+const mapToDates = (data: AxiosResponse<GetDatesResponse[]> | undefined): DateEntity[] | undefined =>
     data?.data.map(item => ({
         id: item.dataID,
         dateTime: item.datetime

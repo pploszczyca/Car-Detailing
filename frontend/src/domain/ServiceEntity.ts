@@ -1,4 +1,4 @@
-export default interface Service {
+export default interface ServiceEntity {
     id: number
     name: string
     type: string

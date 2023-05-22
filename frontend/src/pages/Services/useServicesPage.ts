@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import useGetServicesQuery from "../../hooks/queries/useGetServicesQuery.ts";
-import Service from "../../domain/Service.ts";
+import ServiceEntity from "../../domain/ServiceEntity.ts";
 import useRouter from "../../hooks/router/useRouter.ts";
 
 interface ServiceItem {
@@ -55,7 +55,7 @@ const useServicesPage = (): UseServicesPage => {
     }, [isSuccess]) // Only isSuccess here, to prevent hook's max depth error
 
 
-    function mapServicesToServiceGroups(services: Service[]): ServiceGroup[] {
+    function mapServicesToServiceGroups(services: ServiceEntity[]): ServiceGroup[] {
         const serviceGroups = services.reduce((groups: Record<string, ServiceItem[]>, service) => {
             const {id, name, price, type} = service;
 
