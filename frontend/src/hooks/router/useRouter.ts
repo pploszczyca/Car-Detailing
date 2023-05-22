@@ -5,6 +5,7 @@ interface UseRouter {
     goToMain: () => void
     goToServices: () => void
     goToOrders: () => void
+    goToSelectLocation: (serviceIds: number[]) => void
 }
 
 export default (): UseRouter => {
@@ -19,6 +20,9 @@ export default (): UseRouter => {
         },
         goToOrders: () => {
             navigate(PathRoutes.ORDERS)
-        }
+        },
+        goToSelectLocation: (serviceIds: number[]) => {
+            navigate(`${PathRoutes.SELECT_LOCATION}?serviceIds=${JSON.stringify(serviceIds)}`);
+        },
     }
 }

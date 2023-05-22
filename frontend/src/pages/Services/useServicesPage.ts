@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import useGetServicesQuery from "../../hooks/queries/useGetServicesQuery.ts";
 import Service from "../../domain/Service.ts";
+import useRouter from "../../hooks/router/useRouter.ts";
 
 interface ServiceItem {
     id: number
@@ -44,13 +45,14 @@ const useServicesPage = (): UseServicesPage => {
         error
     } = useGetServicesQuery()
 
+    const { goToSelectLocation } = useRouter()
+
     useEffect(() => {
         if (isSuccess && services != undefined) {
             const groups = mapServicesToServiceGroups(services)
-
             setServiceGroups(groups)
         }
-    }, [isSuccess])
+    }, [isSuccess]) // Only isSuccess here, to prevent hook's max depth error
 
 
     function mapServicesToServiceGroups(services: Service[]): ServiceGroup[] {
@@ -97,8 +99,12 @@ const useServicesPage = (): UseServicesPage => {
     }
 
     const onSubmitButtonClicked = () => {
-        // TODO
-        alert("XDDD")
+        const checkedServiceIds = serviceGroups
+            .flatMap(group => group.serviceItems)
+            .filter(service => service.isChecked)
+            .map(service => service.id)
+
+        goToSelectLocation(checkedServiceIds)
     }
 
     return {
