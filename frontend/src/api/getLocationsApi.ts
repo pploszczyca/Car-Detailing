@@ -8,7 +8,7 @@ export interface GetLocationsResponse {
     city: string
 }
 
-export const getLocationsApi: () => Promise<AxiosResponse<GetLocationsResponse[]>> =
+const getLocationsApi: () => Promise<AxiosResponse<GetLocationsResponse[]>> =
     () => axios.get(`${SERVER_URL}/locations`, {
         headers: {
             'accept': 'application/json'

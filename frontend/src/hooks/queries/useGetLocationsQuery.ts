@@ -30,7 +30,7 @@ const useGetLocationQuery = (): UseGetLocationsQuery => {
     }
 }
 
-const mapToServices = (data: AxiosResponse<GetLocationsResponse[]> | undefined) =>
+const mapToServices = (data: AxiosResponse<GetLocationsResponse[]> | undefined): Location[] | undefined =>
     data?.data.map(item => ({
         ...item,
         id: item.locationID
