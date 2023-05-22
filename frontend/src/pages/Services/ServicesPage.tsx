@@ -39,10 +39,10 @@ export function ServicesPage() {
             <ServiceListContainer>
                 <Title>Wybierz komplet usług dla Twojego samochodu:</Title>
                 {serviceGroups.map((group, index) =>
-                    <GroupContainer>
+                    <GroupContainer key={`Group-${group.type}`}>
                         <SecondTitle>{index + 1}.{group.type}</SecondTitle>
                         {group.serviceItems.map(service =>
-                            <ServiceItemContainer>
+                            <ServiceItemContainer key={`Service-${service.id}`}>
                                 <Checkbox checked={service.isChecked} onChange={() => onServiceChecked(service.id)}/>
                                 <Text>{service.name} - ${service.price}</Text>
                             </ServiceItemContainer>
